@@ -26,6 +26,7 @@ pipeline {
         script {
           echo 'Setting up our Virtual Environment and installing dependencies ........'
           sh '''
+            set -eu
             python3 -m venv "${VENV_DIR}"
             . "${VENV_DIR}/bin/activate"
             pip install --upgrade pip
@@ -41,7 +42,7 @@ pipeline {
           script {
             echo 'Building and pushing Docker image to GCR ........'
             sh '''
-              set -euo pipefail
+              set -eu
               export PATH="$PATH:${GCLOUD_PATH}"
               gcloud auth activate-service-account --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
               gcloud config set project "${GCP_PROJECT}"
