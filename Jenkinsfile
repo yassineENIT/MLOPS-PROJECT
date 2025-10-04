@@ -41,7 +41,6 @@ environment{
 
    stage('Building and pusking Docker image to GCR'){
     steps{
-=
             withCredentials([file(credentialsId: 'gcp-key', variable: 'google_application_credentials')])
             {
                 script{
